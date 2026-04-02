@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 
 const subjectsList = ["Math", "Science", "English", "History"];
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:1234";
 
 function AddMarks() {
   const fileInputRef = useRef(null);
@@ -48,7 +49,7 @@ function AddMarks() {
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch("http://localhost:1234/api/students", {
+      const res = await fetch(`${API_BASE}/api/students`, {
         headers: getAuthHeaders()
       });
 
@@ -64,7 +65,7 @@ function AddMarks() {
 
   const fetchMarks = async () => {
     try {
-      const res = await fetch("http://localhost:1234/api/marks", {
+      const res = await fetch(`${API_BASE}/api/marks`, {
         headers: getAuthHeaders()
       });
 
@@ -107,7 +108,7 @@ function AddMarks() {
         score: Number(formData.marksObtained)
       };
 
-      const res = await fetch("http://localhost:1234/api/marks", {
+      const res = await fetch(`${API_BASE}/api/marks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -177,7 +178,7 @@ function AddMarks() {
 
         if (!email || !subject || Number.isNaN(score)) continue;
 
-        await fetch("http://localhost:1234/api/marks", {
+        await fetch(`${API_BASE}/api/marks`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -4,13 +4,17 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 public class JwtUtil {
 
-    private static final String SECRET = "mysecretkeymysecretkeymysecretkey";
+    private static final String SECRET = System.getenv().getOrDefault(
+            "JWT_SECRET",
+            "change-this-local-dev-secret-key-please-12345"
+    );
 
-    private static final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
+    private static final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
     public static String generateToken(String email) {
         return Jwts.builder()
