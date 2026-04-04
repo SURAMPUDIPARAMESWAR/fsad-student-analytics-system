@@ -15,8 +15,7 @@ import {
   TableRow,
   Alert
 } from "@mui/material";
-
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:1234";
+import { API_BASE } from "../config/api";
 
 function AddStudent() {
   const [students, setStudents] = useState([]);

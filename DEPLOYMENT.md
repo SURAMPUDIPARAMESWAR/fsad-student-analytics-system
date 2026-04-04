@@ -57,7 +57,7 @@ SPRING_DATASOURCE_URL=jdbc:mysql://<HOST>:<PORT>/<DB_NAME>?sslMode=REQUIRED
 SPRING_DATASOURCE_USERNAME=<DB_USERNAME>
 SPRING_DATASOURCE_PASSWORD=<DB_PASSWORD>
 JWT_SECRET=<A_LONG_RANDOM_SECRET_MIN_32_CHARS>
-APP_CORS_ALLOWED_ORIGINS=https://<your-frontend-domain>
+APP_CORS_ALLOWED_ORIGINS=https://<your-frontend-domain>,http://localhost:5173,http://localhost:5174
 ```
 
 After deploy, copy your backend URL:
@@ -76,11 +76,7 @@ frontend/student-analytics-system
 
 Framework preset: `Vite`
 
-Set environment variable in Vercel:
-
-```text
-VITE_API_BASE_URL=https://<your-backend>.onrender.com
-```
+No frontend API environment variable is needed now. The app uses `/api` paths and Vercel rewrites them to the backend.
 
 Deploy and get frontend URL:
 
@@ -90,10 +86,10 @@ https://<your-frontend>.vercel.app
 
 ## 4) Final CORS Update
 
-Update backend env var `APP_CORS_ALLOWED_ORIGINS` to match the exact frontend URL:
+Update backend env var `APP_CORS_ALLOWED_ORIGINS` to include the deployed frontend URL and any local Vite ports you use:
 
 ```text
-APP_CORS_ALLOWED_ORIGINS=https://<your-frontend>.vercel.app
+APP_CORS_ALLOWED_ORIGINS=https://<your-frontend>.vercel.app,http://localhost:5173,http://localhost:5174
 ```
 
 Redeploy backend after this update.
@@ -114,15 +110,11 @@ Open frontend and verify:
 
 ## Local Development Env Values
 
-Frontend (`frontend/student-analytics-system/.env`):
-
-```text
-VITE_API_BASE_URL=http://localhost:1234
-```
+Frontend no longer needs `VITE_API_BASE_URL`; requests are routed through `/api`.
 
 Backend (defaults from `application.properties`):
 
 1. `server.port` defaults to `8080` unless `PORT` is set.
 1. DB defaults to local MySQL unless `SPRING_DATASOURCE_*` env vars are set.
-1. `APP_CORS_ALLOWED_ORIGINS` defaults to `http://localhost:5173`.
+1. `APP_CORS_ALLOWED_ORIGINS` defaults to `http://localhost:5173,http://localhost:5174`.
 

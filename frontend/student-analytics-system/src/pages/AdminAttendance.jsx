@@ -25,8 +25,8 @@ import {
   DialogContent
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { API_BASE } from "../config/api";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:1234";
 const DEFAULT_SUBJECTS = ["Math", "Science", "English", "History"];
 
 const normalizeSubject = (value) => {

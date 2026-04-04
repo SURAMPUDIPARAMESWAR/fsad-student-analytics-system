@@ -13,9 +13,9 @@ import {
   Button,
   Alert
 } from "@mui/material";
+import { API_BASE } from "../config/api";
 
 const subjectsList = ["Math", "Science", "English", "History"];
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:1234";
 
 function AddMarks() {
   const fileInputRef = useRef(null);

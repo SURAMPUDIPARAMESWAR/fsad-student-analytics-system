@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { API_BASE } from "../config/api";
 
 const DataContext = createContext();
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:1234";
 
 export const DataProvider = ({ children }) => {
   const [students, setStudents] = useState([]);
@@ -32,6 +32,12 @@ export const DataProvider = ({ children }) => {
       const res = await fetch(url, { headers: getAuthHeaders() });
 
       if (res.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("user");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("role");
+        window.dispatchEvent(new Event("auth-changed"));
         throw new Error("HTTP 401: Unauthorized");
       }
 

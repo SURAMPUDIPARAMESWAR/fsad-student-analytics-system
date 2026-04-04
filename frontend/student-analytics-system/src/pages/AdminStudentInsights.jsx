@@ -33,9 +33,9 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
+import { API_BASE } from "../config/api";
 
 const subjects = ["Math", "Science", "English", "History"];
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:1234";
 
 function AdminStudentInsights() {
   const [students, setStudents] = useState([]);

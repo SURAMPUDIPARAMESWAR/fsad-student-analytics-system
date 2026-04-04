@@ -10,7 +10,7 @@ import java.util.Arrays;
 @Configuration
 public class CorsConfig {
 
-    @Value("${app.cors.allowed-origins:http://localhost:5173}")
+    @Value("${app.cors.allowed-origins:http://localhost:5173,http://localhost:5174}")
     private String allowedOrigins;
 
     @Bean

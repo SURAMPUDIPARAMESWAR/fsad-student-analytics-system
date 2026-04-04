@@ -1,5 +1,9 @@
 {
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://fsad-student-analytics-system-backend.onrender.com/api/$1"
+    },
     { "source": "/(.*)", "destination": "/" }
   ]
 }
